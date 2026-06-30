@@ -7,7 +7,8 @@ serves static assets (favicon), and provides health checks.
 """
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 import logging
@@ -80,6 +81,15 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# ---- CORS middleware ----
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Restrict to your frontend domain in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Mount static folder for favicon.ico and other assets
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -113,13 +123,16 @@ app.include_router(
 # ----------------------------------------------------------------------------
 @app.get("/")
 def root():
+    """Welcome page with greeting and API documentation."""
     return {
-        "message": "MongoDB API is running",
+        "greeting": "Welcome to the MongoDB Dynamic API",
+        "message": "Your data is ready to be explored.",
         "endpoints": {
             "writing": "/writing",
             "artwork": "/artwork",
             "health": "/health"
-        }
+        },
+        "documentation": "/docs"
     }
 
 @app.get("/health")
@@ -138,11 +151,7 @@ def health():
 
 # ----------------------------------------------------------------------------
 # Favicon shortcut – returns 204 to silence browser requests
-# (The actual favicon is served via /static/favicon.ico, but we also handle
-# the root /favicon.ico with a no-content response for cleanliness.)
 # ----------------------------------------------------------------------------
-from fastapi import Response
-
 @app.get("/favicon.ico")
 async def favicon():
     return Response(status_code=204)
