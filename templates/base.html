@@ -1,0 +1,83 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}MongoDB Dynamic API{% endblock %}</title>
+    <style>
+        /* Global styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 40px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        h1 { color: #0f172a; margin-top: 0; }
+        .badge {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+        .endpoint {
+            background: #f8fafc;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 12px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .endpoint .method {
+            display: inline-block;
+            font-weight: bold;
+            color: #3b82f6;
+            width: 80px;
+        }
+        .endpoint .path {
+            font-family: 'Courier New', monospace;
+            font-size: 1.05rem;
+        }
+        .endpoint .desc {
+            color: #475569;
+            margin-top: 4px;
+        }
+        .footer {
+            margin-top: 40px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+        a { color: #3b82f6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .section-title {
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+        <div class="footer">
+            {% block footer %}
+            Powered by Flask + PyMongo &middot; <a href="/docs">/docs</a> (if you have OpenAPI) &middot;
+            <a href="https://github.com" target="_blank">Source</a>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}MongoDB Dynamic API – Home{% endblock %}
+
+{% block content %}
+    <h1>MongoDB Dynamic API</h1>
+    <p style="font-size: 1.1rem; color: #334155; margin-bottom: 20px;">
+        Welcome! Your collections are ready to be explored.
+    </p>
+    <p><span class="badge">Active</span> Connected to <strong>{{ db_name }}</strong></p>
+
+    <h2 class="section-title">Available Endpoints</h2>
+
+    <div class="endpoint">
+        <span class="method">GET</span> <span class="path">/</span>
+        <div class="desc">This home page</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">GET</span> <span class="path">/health</span>
+        <div class="desc">Service health and database connection status</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">GET</span> <span class="path">/writing</span>
+        <div class="desc">List all documents from <strong>Writing</strong> (WXNoteBookApp DB)</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">POST</span> <span class="path">/writing</span>
+        <div class="desc">Create a new document in <strong>Writing</strong> (JSON body)</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">GET</span> <span class="path">/writing/&lt;id&gt;</span>
+        <div class="desc">Retrieve a specific document by ID</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">PATCH</span> <span class="path">/writing/&lt;id&gt;</span>
+        <div class="desc">Update a document (partial update)</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">DELETE</span> <span class="path">/writing/&lt;id&gt;</span>
+        <div class="desc">Delete a document</div>
+    </div>
+
+    <hr style="border: 1px dashed #e2e8f0; margin: 20px 0;" />
+
+    <div class="endpoint">
+        <span class="method">GET</span> <span class="path">/artwork</span>
+        <div class="desc">List all documents from <strong>Artwork</strong> (TestMy DB)</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">POST</span> <span class="path">/artwork</span>
+        <div class="desc">Create a new document in <strong>Artwork</strong></div>
+    </div>
+    <div class="endpoint">
+        <span class="method">GET</span> <span class="path">/artwork/&lt;id&gt;</span>
+        <div class="desc">Retrieve a specific artwork by ID</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">PATCH</span> <span class="path">/artwork/&lt;id&gt;</span>
+        <div class="desc">Update an artwork</div>
+    </div>
+    <div class="endpoint">
+        <span class="method">DELETE</span> <span class="path">/artwork/&lt;id&gt;</span>
+        <div class="desc">Delete an artwork</div>
+    </div>
+{% endblock %}
